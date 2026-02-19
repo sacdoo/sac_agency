@@ -5,16 +5,10 @@
   --muted: #c4c4bd;
   --accent: #c7ff52;
   --grid-max: 1200px;
-  --grid-gap: clamp(16px, 2vw, 32px);
-  --outer: clamp(20px, 5vw, 64px);
-  --hero-max: clamp(52px, 12vw, 168px);
-  --hero-track: 0.045em;
-  --blob-a-x: 15vw;
-  --blob-a-y: 20vh;
-  --blob-b-x: 70vw;
-  --blob-b-y: 10vh;
-  --blob-c-x: 50vw;
-  --blob-c-y: 65vh;
+  --grid-gap: clamp(12px, 2vw, 24px);
+  --outer: clamp(12px, 3vw, 40px);
+  --hero-max: clamp(48px, 11vw, 160px);
+  --hero-track: 0.05em;
 }
 
 * {
@@ -52,49 +46,6 @@ main {
   z-index: 3;
 }
 
-.gradient-field {
-  position: fixed;
-  inset: -30vh -10vw;
-  pointer-events: none;
-  z-index: 1;
-  filter: blur(40px);
-}
-
-.blob {
-  position: absolute;
-  width: clamp(320px, 38vw, 680px);
-  height: clamp(320px, 38vw, 680px);
-  border-radius: 999px;
-  background: radial-gradient(circle at 30% 30%, rgba(199, 255, 82, 0.38), rgba(199, 255, 82, 0) 65%);
-  mix-blend-mode: screen;
-  opacity: 0.8;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.6s ease;
-}
-
-.blob-a {
-  left: var(--blob-a-x);
-  top: var(--blob-a-y);
-}
-
-.blob-b {
-  left: var(--blob-b-x);
-  top: var(--blob-b-y);
-  width: clamp(260px, 30vw, 560px);
-  height: clamp(260px, 30vw, 560px);
-  background: radial-gradient(circle at 40% 30%, rgba(242, 242, 240, 0.2), rgba(199, 255, 82, 0) 70%);
-  opacity: 0.7;
-}
-
-.blob-c {
-  left: var(--blob-c-x);
-  top: var(--blob-c-y);
-  width: clamp(380px, 46vw, 820px);
-  height: clamp(380px, 46vw, 820px);
-  background: radial-gradient(circle at 50% 40%, rgba(199, 255, 82, 0.28), rgba(199, 255, 82, 0) 70%);
-  opacity: 0.6;
-}
-
 .video-bg {
   position: fixed;
   inset: 0;
@@ -125,14 +76,14 @@ main {
   position: sticky;
   top: 0;
   z-index: 5;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(10px);
   background: linear-gradient(180deg, rgba(15, 15, 16, 0.9), rgba(15, 15, 16, 0));
 }
 
 .nav {
   max-width: var(--grid-max);
   margin: 0 auto;
-  padding: 24px var(--outer) 16px;
+  padding: 20px var(--outer) 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -172,7 +123,7 @@ main {
 
 .nav-links {
   display: flex;
-  gap: clamp(16px, 3vw, 32px);
+  gap: clamp(14px, 2vw, 28px);
 }
 
 .logo {
@@ -189,7 +140,7 @@ main {
 }
 
 .hero {
-  min-height: 92vh;
+  min-height: 88vh;
   display: flex;
   align-items: center;
   position: relative;
@@ -197,10 +148,10 @@ main {
 }
 
 .hero-title {
-  grid-column: 1 / span 12;
+  grid-column: 1 / span 5;
   font-size: var(--hero-max);
   letter-spacing: var(--hero-track);
-  line-height: 0.9;
+  line-height: 0.92;
   text-transform: uppercase;
 }
 
@@ -208,92 +159,41 @@ main {
   display: block;
 }
 
-.hero-row:nth-child(2) {
-  justify-self: start;
-}
-
-.hero-row:nth-child(3) {
-  justify-self: end;
-}
-
 .hero-note {
   grid-column: 1 / span 4;
-  margin-top: clamp(16px, 4vh, 40px);
+  margin-top: clamp(12px, 3vh, 28px);
   color: var(--muted);
-  font-size: clamp(14px, 1.4vw, 18px);
+  font-size: clamp(13px, 1.3vw, 16px);
   letter-spacing: 0.02em;
 }
 
-.works,
 .about,
 .contact {
-  padding: clamp(64px, 10vw, 140px) 0;
+  padding: clamp(48px, 9vw, 120px) 0;
   position: relative;
   z-index: 2;
 }
 
-.section-head {
-  grid-column: 1 / span 4;
-}
-
-.section-head h2,
 .about h2,
 .contact h2 {
+  grid-column: 1 / span 2;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  font-size: 12px;
-  margin-bottom: 12px;
+  font-size: 11px;
+  margin-bottom: 8px;
 }
 
-.section-head p,
 .about p,
 .contact p {
+  grid-column: 3 / span 4;
   color: var(--muted);
-  font-size: clamp(14px, 1.5vw, 18px);
-}
-
-.cards {
-  grid-column: 5 / span 8;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(16px, 2vw, 28px);
-}
-
-.card {
-  border: 1px solid rgba(242, 242, 240, 0.15);
-  padding: clamp(20px, 3vw, 32px);
-  min-height: 140px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-  backdrop-filter: blur(4px);
-  background: rgba(15, 15, 16, 0.6);
-}
-
-.card:hover,
-.card:focus-visible {
-  transform: translateY(-6px) scale(1.02);
-  border-color: rgba(199, 255, 82, 0.6);
-  box-shadow: 0 18px 40px rgba(15, 15, 16, 0.45);
-}
-
-.card-title {
-  font-size: clamp(18px, 2vw, 24px);
-  letter-spacing: 0.02em;
-}
-
-.card-meta {
-  color: var(--muted);
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  font-size: clamp(13px, 1.4vw, 16px);
 }
 
 .site-footer {
-  padding: 32px 0 48px;
+  padding: 24px 0 40px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   position: relative;
@@ -305,12 +205,44 @@ main {
 }
 
 .site-footer span:last-child {
-  grid-column: 8 / span 5;
+  grid-column: 7 / span 6;
   text-align: right;
 }
 
-.works-hero {
-  min-height: 60vh;
+.works-grid {
+  padding: clamp(32px, 7vw, 120px) 0;
+  position: relative;
+  z-index: 2;
+}
+
+.works-grid .grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 24px);
+  max-width: none;
+  padding: 0 var(--outer);
+}
+
+.work-card {
+  border: 1px solid rgba(242, 242, 240, 0.12);
+  padding: clamp(18px, 3vw, 30px);
+  min-height: clamp(140px, 24vh, 220px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: rgba(15, 15, 16, 0.65);
+}
+
+.work-card h2 {
+  font-size: clamp(20px, 2.6vw, 28px);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.work-card p {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 11px;
 }
 
 @media (max-width: 900px) {
@@ -324,15 +256,18 @@ main {
     flex-wrap: wrap;
   }
 
-  .hero-note {
+  .hero-title {
     grid-column: 1 / span 8;
   }
 
-  .section-head {
-    grid-column: 1 / span 12;
+  .hero-note {
+    grid-column: 1 / span 7;
   }
 
-  .cards {
+  .about h2,
+  .contact h2,
+  .about p,
+  .contact p {
     grid-column: 1 / span 12;
   }
 
@@ -343,20 +278,8 @@ main {
   }
 }
 
-@media (max-width: 600px) {
-  .hero {
-    min-height: 80vh;
-  }
-
-  .hero-title {
-    line-height: 0.95;
-  }
-
-  .hero-note {
-    grid-column: 1 / span 12;
-  }
-
-  .cards {
+@media (max-width: 700px) {
+  .works-grid .grid {
     grid-template-columns: 1fr;
   }
 }
@@ -364,13 +287,5 @@ main {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-
-  .card {
-    transition: none;
-  }
-
-  .blob {
-    transition: none;
   }
 }
