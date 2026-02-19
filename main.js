@@ -1,42 +1,48 @@
-const spotlight = document.querySelector(".spotlight");
+const gradientField = document.querySelector(".gradient-field");
+const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-if (spotlight) {
-  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-  let targetX = window.innerWidth * 0.5;
-  let targetY = window.innerHeight * 0.3;
-  let currentX = targetX;
-  let currentY = targetY;
+if (gradientField) {
+  const state = {
+    x: window.innerWidth * 0.5,
+    y: window.innerHeight * 0.4,
+    tx: window.innerWidth * 0.5,
+    ty: window.innerHeight * 0.4,
+  };
 
   const lerp = (start, end, amt) => start + (end - start) * amt;
 
   const update = () => {
     if (!prefersReduced.matches) {
-      currentX = lerp(currentX, targetX, 0.08);
-      currentY = lerp(currentY, targetY, 0.08);
-      spotlight.style.background = `radial-gradient(circle at ${currentX}px ${currentY}px, rgba(199, 255, 82, 0.18), rgba(17, 17, 17, 0) 60%)`;
+      state.x = lerp(state.x, state.tx, 0.06);
+      state.y = lerp(state.y, state.ty, 0.06);
+
+      const x = state.x;
+      const y = state.y;
+
+      document.documentElement.style.setProperty("--blob-a-x", `${x * 0.6}px`);
+      document.documentElement.style.setProperty("--blob-a-y", `${y * 0.6}px`);
+      document.documentElement.style.setProperty("--blob-b-x", `${x * 0.9}px`);
+      document.documentElement.style.setProperty("--blob-b-y", `${y * 0.35}px`);
+      document.documentElement.style.setProperty("--blob-c-x", `${x * 0.45}px`);
+      document.documentElement.style.setProperty("--blob-c-y", `${y * 0.9}px`);
     }
+
     requestAnimationFrame(update);
   };
 
   const handleMove = (event) => {
-    const x = event.clientX;
-    const y = event.clientY;
-    targetX = x;
-    targetY = y;
+    state.tx = event.clientX;
+    state.ty = event.clientY;
   };
 
   if (!prefersReduced.matches) {
-    window.addEventListener("mousemove", handleMove);
+    window.addEventListener("mousemove", handleMove, { passive: true });
   } else {
-    spotlight.style.opacity = "0.3";
+    gradientField.style.opacity = "0.55";
   }
 
   prefersReduced.addEventListener("change", () => {
-    if (prefersReduced.matches) {
-      spotlight.style.opacity = "0.2";
-    } else {
-      spotlight.style.opacity = "1";
-    }
+    gradientField.style.opacity = prefersReduced.matches ? "0.4" : "1";
   });
 
   update();
