@@ -81,7 +81,7 @@ main {
 }
 
 .nav {
-  max-width: var(--grid-max);
+  max-width: none;
   margin: 0 auto;
   padding: 20px var(--outer) 12px;
   display: flex;
