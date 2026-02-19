@@ -7,8 +7,8 @@
   --grid-max: 1200px;
   --grid-gap: clamp(12px, 2vw, 24px);
   --outer: clamp(12px, 3vw, 40px);
-  --hero-max: clamp(48px, 11vw, 160px);
-  --hero-track: 0.05em;
+  --hero-max: clamp(22px, 4.2vw, 48px);
+  --hero-track: 0.04em;
 }
 
 * {
@@ -140,7 +140,7 @@ main {
 }
 
 .hero {
-  min-height: 88vh;
+  min-height: 75vh;
   display: flex;
   align-items: center;
   position: relative;
@@ -148,23 +148,15 @@ main {
 }
 
 .hero-title {
-  grid-column: 1 / span 5;
+  grid-column: 1 / span 6;
   font-size: var(--hero-max);
   letter-spacing: var(--hero-track);
-  line-height: 0.92;
+  line-height: 1.1;
   text-transform: uppercase;
 }
 
 .hero-row {
   display: block;
-}
-
-.hero-note {
-  grid-column: 1 / span 4;
-  margin-top: clamp(12px, 3vh, 28px);
-  color: var(--muted);
-  font-size: clamp(13px, 1.3vw, 16px);
-  letter-spacing: 0.02em;
 }
 
 .about,
@@ -257,11 +249,7 @@ main {
   }
 
   .hero-title {
-    grid-column: 1 / span 8;
-  }
-
-  .hero-note {
-    grid-column: 1 / span 7;
+    grid-column: 1 / span 10;
   }
 
   .about h2,
@@ -281,6 +269,10 @@ main {
 @media (max-width: 700px) {
   .works-grid .grid {
     grid-template-columns: 1fr;
+  }
+
+  .hero {
+    min-height: 60vh;
   }
 }
 
